@@ -17,7 +17,7 @@ const CountryDisplay = ({ countries, setCountries, search, setDisplay }) => {
       <p>I've found {display.length} countries. Narrow your search.</p>
     ));
 
-  display = display.map(country => <li>{country.name}</li>);
+  display = display.map(country => <CountryGroup country={country} />);
 
   return <div>{display} </div>;
 };
