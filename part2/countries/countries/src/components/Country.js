@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Weather from './Weather';
 
 const Country = ({ country }) => {
   const languages = country.languages.map(language => <li>{language.name}</li>);
   const flag = country.flag;
   const alt = `flag of ${country.name}`;
 
-  console.log(country);
   return (
     <div>
       <div>
@@ -21,6 +22,9 @@ const Country = ({ country }) => {
       </div>
       <div>
         <img src={flag} alt={alt} width={75} height={50} />
+      </div>
+      <div>
+        <Weather country={country} key={country.name} />
       </div>
     </div>
   );
