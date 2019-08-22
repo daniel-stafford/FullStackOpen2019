@@ -1,5 +1,5 @@
-import React from 'react';
-import DeleteButton from './DeleteButton';
+import React from 'react'
+import DeleteButton from './DeleteButton'
 
 const Person = ({ person, setPersons, handleDelete, persons }) => {
   return (
@@ -13,7 +13,7 @@ const Person = ({ person, setPersons, handleDelete, persons }) => {
         handleDelete={handleDelete}
       />
     </li>
-  );
-};
+  )
+}
 
-export default Person;
+export default Person
