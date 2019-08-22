@@ -19,6 +19,14 @@ const App = () => {
 
   let personsToShow = persons;
 
+  const handleDelete = deletePerson => {
+    const confirmation = window.confirm(`Delete ${deletePerson.name}?`);
+    if (confirmation) {
+      phoneService.remove(deletePerson.id);
+      setPersons(persons.filter(person => person.id !== deletePerson.id));
+    }
+  };
+
   personsToShow =
     newFilter === ''
       ? (personsToShow = persons)
@@ -49,7 +57,12 @@ const App = () => {
         setPersons={setPersons}
       />
       <h2>Numbers</h2>
-      <Persons personsToShow={personsToShow} />
+      <Persons
+        personsToShow={personsToShow}
+        setPerson={setPersons}
+        handleDelete={handleDelete}
+        persons={persons}
+      />
     </div>
   );
 };
