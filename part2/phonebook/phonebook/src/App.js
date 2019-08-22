@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Persons from './components/Persons';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
-import axios from 'axios';
+import phoneService from './services/persons';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -12,13 +12,10 @@ const App = () => {
   const [newToDisplay, setToDisplay] = useState(persons);
 
   useEffect(() => {
-    console.log('effect');
-    axios.get('http://localhost:3001/persons').then(response => {
-      console.log('promise fulfilled');
-      setPersons(response.data);
+    phoneService.getAll().then(initialPersons => {
+      setPersons(initialPersons);
     });
   }, []);
-  console.log('render', persons.length, 'persons');
 
   let personsToShow = persons;
 

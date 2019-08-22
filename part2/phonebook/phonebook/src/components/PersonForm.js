@@ -1,4 +1,6 @@
 import React from 'react';
+import phoneService from '../services/persons';
+
 const PersonForm = ({
   newName,
   newNumber,
@@ -18,10 +20,20 @@ const PersonForm = ({
       return alert(`${newName} is already in the phonebook.`);
 
     const personObject = { name: newName, number: newNumber };
-    setPersons(persons.concat(personObject));
-    setNewName('');
-    setNewNumber('');
+    phoneService.create(personObject).then(returnedPerson => {
+      setPersons(persons.concat(returnedPerson));
+      setNewName('');
+      setNewNumber('');
+    });
   };
+
+  //   axios.post('http://localhost:3001/persons', personObject).then(response => {
+  //     setPersons(persons.concat(response.data));
+  //     console.log('response', response);
+  //     setNewName('');
+  //     setNewNumber('');
+  //   });
+  // };
 
   const handleNameChange = e => {
     console.log(e.target.value);
