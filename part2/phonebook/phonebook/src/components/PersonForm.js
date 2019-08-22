@@ -16,8 +16,25 @@ const PersonForm = ({
       persons
         .map(person => person.name.toLowerCase())
         .includes(newName.toLowerCase())
-    )
-      return alert(`${newName} is already in the phonebook.`);
+    ) {
+      // return alert(`${newName} is already in the phonebook.`);
+      const confirmation = window.confirm(
+        `Would you like to update ${newName}'s phone number?`
+      );
+      if (confirmation) {
+        const updatePerson = persons.find(person => person.name === newName);
+        const changedPerson = {
+          ...updatePerson,
+          number: newNumber
+        };
+        phoneService.update(updatePerson.id, changedPerson);
+        return setPersons(
+          persons.map(person =>
+            person.name === newName ? changedPerson : person
+          )
+        );
+      } else return;
+    }
 
     const personObject = { name: newName, number: newNumber };
     phoneService.create(personObject).then(returnedPerson => {
